@@ -55,4 +55,16 @@ resource "aws_ecs_service" "nginx" {
   name = "${var.name}-nginx"
   task_definition = "${aws_ecs_task_definition.nginx.id}"
   desired_count = 1
+
+  placement_strategy {
+    type = "spread"
+    field = "attribute:ecs.availability-zone"
+  }
+
+  placement_strategy {
+    type = "binpack"
+    field = "memory"
+  }
+
+
 }
