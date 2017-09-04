@@ -54,7 +54,9 @@ resource "aws_ecs_service" "nginx" {
   cluster = "${aws_ecs_cluster.default.id}"
   name = "${var.name}-nginx"
   task_definition = "${aws_ecs_task_definition.nginx.id}"
-  desired_count = 1
+  desired_count = "${var.count}"
+
+  iam_role = "${aws_iam_role.ecs_service.name}"
 
   placement_strategy {
     type = "spread"
@@ -66,5 +68,38 @@ resource "aws_ecs_service" "nginx" {
     field = "memory"
   }
 
+  load_balancer {
+    target_group_arn = "${aws_alb_target_group.default.arn}"
+    container_name = "nginx"
+    container_port = 80
+  }
 
 }
+
+resource "aws_alb" "default" {
+  subnets = ["${aws_subnet.subnet1.id}", "${aws_subnet.subnet2.id}", "${aws_subnet.subnet3.id}"]
+
+  security_groups = ["${aws_security_group.default.id}"]
+}
+
+resource "aws_alb_listener" "default" {
+  "default_action" {
+    target_group_arn = "${aws_alb_target_group.default.arn}"
+    type = "forward"
+  }
+  load_balancer_arn = "${aws_alb.default.arn}"
+  port = 80
+}
+
+resource "aws_alb_target_group" "default" {
+
+  vpc_id = "${aws_vpc.default.id}"
+  port = 80
+  protocol = "HTTP"
+
+//  health_check {
+//
+//  }
+}
+
+

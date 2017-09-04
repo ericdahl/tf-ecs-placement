@@ -13,3 +13,7 @@ output "ecs2.public_ip" {
 output "ecs3.public_ip" {
   value = "${aws_instance.ecs3.public_ip}"
 }
+
+output "alb" {
+  value = "${aws_alb.default.dns_name}"
+}
