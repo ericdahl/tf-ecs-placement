@@ -77,9 +77,30 @@ resource "aws_security_group" "default" {
 
   ingress {
     protocol = "tcp"
+    from_port = 32768
+
+    to_port = 60999
+
+    security_groups = ["${aws_security_group.alb.id}"]
+  }
+
+  egress {
+    from_port = 0
+    protocol = "-1"
+    to_port = 0
+    cidr_blocks = [
+      "0.0.0.0/0"]
+  }
+}
+
+resource "aws_security_group" "alb" {
+  vpc_id = "${aws_vpc.default.id}"
+
+  ingress {
+    protocol = "tcp"
     from_port = 80
 
-    to_port = 65000
+    to_port = 80
     cidr_blocks = [
       "0.0.0.0/0"]
   }

@@ -79,7 +79,7 @@ resource "aws_ecs_service" "nginx" {
 resource "aws_alb" "default" {
   subnets = ["${aws_subnet.subnet1.id}", "${aws_subnet.subnet2.id}", "${aws_subnet.subnet3.id}"]
 
-  security_groups = ["${aws_security_group.default.id}"]
+  security_groups = ["${aws_security_group.alb.id}"]
 }
 
 resource "aws_alb_listener" "default" {
