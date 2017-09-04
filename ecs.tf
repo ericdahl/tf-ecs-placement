@@ -58,10 +58,10 @@ resource "aws_ecs_service" "nginx" {
 
   iam_role = "${aws_iam_role.ecs_service.name}"
 
-  placement_strategy {
-    type = "spread"
-    field = "attribute:ecs.availability-zone"
-  }
+//  placement_strategy {
+//    type = "spread"
+//    field = "attribute:ecs.availability-zone"
+//  }
 
   placement_strategy {
     type = "binpack"
