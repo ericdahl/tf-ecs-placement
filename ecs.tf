@@ -92,14 +92,9 @@ resource "aws_alb_listener" "default" {
 }
 
 resource "aws_alb_target_group" "default" {
-
   vpc_id = "${aws_vpc.default.id}"
   port = 80
   protocol = "HTTP"
-
-//  health_check {
-//
-//  }
 }
 
 
