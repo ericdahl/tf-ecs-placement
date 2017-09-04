@@ -1,2 +1,2 @@
 #!/bin/bash
-echo ECS_CLUSTER='tf-ecs-metrics' >> /etc/ecs/ecs.config
+echo ECS_CLUSTER='tf-ecs-placement' >> /etc/ecs/ecs.config

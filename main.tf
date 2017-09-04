@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 variable "name" {
-  default = "tf-ecs-metrics"
+  default = "tf-ecs-placement"
 }
 
 resource "aws_instance" "default" {
