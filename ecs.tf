@@ -37,6 +37,22 @@ resource "aws_instance" "ecs3" {
   user_data = "${data.template_file.ecs_user_data.rendered}"
 }
 
+resource "aws_instance" "ecs_special_1" {
+  ami = "ami-9eb4b1e5"
+  instance_type = "t2.small"
+  subnet_id = "${aws_subnet.subnet3.id}"
+  vpc_security_group_ids = ["${aws_security_group.default.id}"]
+  key_name = "${var.key}"
+
+  iam_instance_profile = "${aws_iam_instance_profile.default.name}"
+
+  user_data = "${data.template_file.ecs_user_data.rendered}"
+
+  tags {
+    Special = "true"
+  }
+}
+
 resource "aws_ecs_cluster" "default" {
   name = "${var.name}"
 }
@@ -53,7 +69,7 @@ resource "aws_ecs_task_definition" "nginx" {
 resource "aws_ecs_service" "nginx" {
   cluster = "${aws_ecs_cluster.default.id}"
   name = "${var.name}-nginx"
-  task_definition = "${aws_ecs_task_definition.nginx.id}"
+  task_definition = "${aws_ecs_task_definition.nginx.id}:2"
   desired_count = "${var.count}"
 
   iam_role = "${aws_iam_role.ecs_service.name}"
