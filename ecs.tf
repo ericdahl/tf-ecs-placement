@@ -134,6 +134,10 @@ resource "aws_alb_target_group" "default" {
   vpc_id = "${aws_vpc.default.id}"
   port = 80
   protocol = "HTTP"
+
+  health_check {
+    healthy_threshold = 2
+  }
 }
 
 
