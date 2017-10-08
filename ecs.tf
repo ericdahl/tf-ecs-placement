@@ -97,15 +97,20 @@ resource "aws_ecs_service" "nginx" {
     field = "attribute:ecs.availability-zone"
   }
 
+//  placement_strategy {
+//    type = "binpack"
+//    field = "memory"
+//  }
+
   placement_strategy {
-    type = "binpack"
-    field = "memory"
+    type = "spread"
+    field = "instanceId"
   }
 
-  placement_constraints {
-    type = "memberOf"
-    expression = "attribute:Special == true"
-  }
+//  placement_constraints {
+//    type = "memberOf"
+//    expression = "attribute:Special == true"
+//  }
 
   load_balancer {
     target_group_arn = "${aws_alb_target_group.default.arn}"

@@ -7,5 +7,5 @@ variable "ami_ecs" {
 }
 
 variable "count" {
-  default = 4
+  default = 5
 }
