@@ -87,7 +87,7 @@ resource "aws_ecs_task_definition" "nginx" {
 resource "aws_ecs_service" "nginx" {
   cluster = "${aws_ecs_cluster.default.id}"
   name = "${var.name}-nginx"
-  task_definition = "${aws_ecs_task_definition.nginx.id}:2"
+  task_definition = "${aws_ecs_task_definition.nginx.arn}"
   desired_count = "${var.count}"
 
   iam_role = "${aws_iam_role.ecs_service.name}"
