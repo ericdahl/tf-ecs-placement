@@ -7,7 +7,7 @@ data "template_file" "ecs_special_user_data" {
 }
 
 resource "aws_instance" "ecs1" {
-  ami = "ami-9eb4b1e5"
+  ami = "${var.ami_ecs}"
   instance_type = "t2.small"
   subnet_id = "${aws_subnet.subnet1.id}"
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
@@ -23,7 +23,7 @@ resource "aws_instance" "ecs1" {
 }
 
 resource "aws_instance" "ecs2" {
-  ami = "ami-9eb4b1e5"
+  ami = "${var.ami_ecs}"
   instance_type = "t2.small"
   subnet_id = "${aws_subnet.subnet2.id}"
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
@@ -39,7 +39,7 @@ resource "aws_instance" "ecs2" {
 }
 
 resource "aws_instance" "ecs3" {
-  ami = "ami-9eb4b1e5"
+  ami = "${var.ami_ecs}"
   instance_type = "t2.small"
   subnet_id = "${aws_subnet.subnet3.id}"
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
@@ -55,7 +55,7 @@ resource "aws_instance" "ecs3" {
 }
 
 resource "aws_instance" "ecs_special_1" {
-  ami = "ami-9eb4b1e5"
+  ami = "${var.ami_ecs}"
   instance_type = "t2.small"
   subnet_id = "${aws_subnet.subnet3.id}"
   vpc_security_group_ids = ["${aws_security_group.default.id}"]
