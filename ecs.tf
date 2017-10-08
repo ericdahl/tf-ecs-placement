@@ -16,6 +16,10 @@ resource "aws_instance" "ecs1" {
   iam_instance_profile = "${aws_iam_instance_profile.default.name}"
 
   user_data = "${data.template_file.ecs_user_data.rendered}"
+
+  tags {
+    Name = "ecs1"
+  }
 }
 
 resource "aws_instance" "ecs2" {
@@ -28,6 +32,10 @@ resource "aws_instance" "ecs2" {
   iam_instance_profile = "${aws_iam_instance_profile.default.name}"
 
   user_data = "${data.template_file.ecs_user_data.rendered}"
+
+  tags {
+    Name = "ecs2"
+  }
 }
 
 resource "aws_instance" "ecs3" {
@@ -40,6 +48,10 @@ resource "aws_instance" "ecs3" {
   iam_instance_profile = "${aws_iam_instance_profile.default.name}"
 
   user_data = "${data.template_file.ecs_user_data.rendered}"
+
+  tags {
+    Name = "ecs3"
+  }
 }
 
 resource "aws_instance" "ecs_special_1" {
@@ -54,6 +66,7 @@ resource "aws_instance" "ecs_special_1" {
   user_data = "${data.template_file.ecs_special_user_data.rendered}"
 
   tags {
+    Name = "ecs_special_1"
     Special = "true"
   }
 }
